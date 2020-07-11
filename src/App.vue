@@ -3,12 +3,7 @@
     <quotes-added></quotes-added>
     <add-quote></add-quote>
     <div class="quotes-grid">
-      <quote-card quote="A quote to Start With."></quote-card>
-      <quote-card quote="A quote to Start With.A quote to Start With.A quote to Start With."></quote-card>
-      <quote-card quote="A quote to Start With.A quote to Start With.A quote to Start With."></quote-card>
-      <quote-card quote="A quote to Start With.A quote to Start With.A quote to Start With."></quote-card>
-      <quote-card quote="A quote to Start With."></quote-card>
-      <quote-card quote="A quote to Start With."></quote-card>
+      <quote-card v-for="(data, index) in quotes" :key="data" :quote="data" :index="index"></quote-card>
     </div>
   </div>
 </template>
@@ -17,11 +12,18 @@
 import quotesAdded from "./components/QuotesAdded.vue";
 import addQuote from "./components/AddQuote.vue";
 import quoteCard from "./components/QuoteCard.vue";
+import { eventBus } from "./main.js";
+
 export default {
   components: {
     "quotes-added": quotesAdded,
     "add-quote": addQuote,
     "quote-card": quoteCard
+  },
+  data: function() {
+    return {
+      quotes: eventBus.quotes
+    };
   }
 };
 </script>

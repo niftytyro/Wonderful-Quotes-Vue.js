@@ -2,16 +2,30 @@
   <div id="add-quote-wrapper">
     <div class="title">Add Quote</div>
     <div class="input-group">
-      <textarea class="form-control"></textarea>
+      <textarea class="form-control" v-model="quoteText"></textarea>
     </div>
     <div class="add-button">
-      <button type="button" class="btn btn-primary">Add Quote</button>
+      <button type="button" @click="addQuote" class="btn btn-primary">Add Quote</button>
     </div>
   </div>
 </template>
 
 <script>
-export default {};
+import { eventBus } from "../main.js";
+
+export default {
+  data: function() {
+    return {
+      quoteText: ""
+    };
+  },
+  methods: {
+    addQuote() {
+      eventBus.$emit("add", this.quoteText);
+      this.quoteText = "";
+    }
+  }
+};
 </script>
 
 <style scoped>

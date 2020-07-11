@@ -15,11 +15,21 @@
 </template>
 
 <script>
+import { eventBus } from "../main.js";
+
 export default {
   data: function() {
     return {
       quotesCounter: 1
     };
+  },
+  created() {
+    eventBus.$on("add", quote => {
+      this.quotesCounter = eventBus.quotes.length;
+    });
+    eventBus.$on("remove", index => {
+      this.quotesCounter = eventBus.quotes.length;
+    });
   }
 };
 </script>

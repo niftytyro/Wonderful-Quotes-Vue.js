@@ -1,10 +1,17 @@
 <template>
-  <div class="quote-card">{{ quote }}</div>
+  <div class="quote-card" @click="removeQuote">{{ quote }}</div>
 </template>
 
 <script>
+import { eventBus } from "../main.js";
+
 export default {
-  props: ["quote"]
+  props: ["quote", "index"],
+  methods: {
+    removeQuote() {
+      eventBus.$emit("remove", this.index);
+    }
+  }
 };
 </script>
 
@@ -17,5 +24,10 @@ export default {
   border-radius: 10px;
   padding: 10px;
   margin: 10px;
+}
+.quote-card:hover {
+  background: #ff333366;
+  border: 1px solid #aa0000;
+  cursor: pointer;
 }
 </style>
